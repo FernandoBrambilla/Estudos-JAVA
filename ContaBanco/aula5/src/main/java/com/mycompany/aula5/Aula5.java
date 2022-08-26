@@ -14,13 +14,18 @@ package com.mycompany.aula5;
 public class Aula5 {
 
     public static void main(String[] args) {
+        
         ContaBanco conta1=new ContaBanco("2222-2", "Conta Corrente", "Fernando Henriqe Brambilla", 0f, false);
         conta1.abrirConta();
         conta1.depositar();
         conta1.sacar();
+        conta1.encerrarConta();
+        
+        
         conta1.pagarMensalidade();
         conta1.extratoConta();
-        conta1.encerrarConta();
+        
+        
         ContaBanco conta2=new ContaBanco("4534-2", "Conta Poupança", "Gislaine Lourenço Bambilla", 0, false);
         conta2.abrirConta();
         conta2.depositar();

@@ -60,7 +60,7 @@ public class ContaBanco {
         this.saldoConta = saldoConta;
     }
 
-    public boolean isStatusConta() {
+    public boolean getStatusConta() {
         return statusConta;
     }
 
@@ -79,25 +79,38 @@ public class ContaBanco {
                     this.setSaldoConta(100.00f);
                     }    
             
-        }
-                
-    
-    
+    }
+     
     public void encerrarConta(){
-        if (this.getSaldoConta()!=0||this.statusConta==true){
-            JOptionPane.showMessageDialog(null, "Impossível encerrar a conta, o Sado precisa ser Zero\n"+
+        if (this.getSaldoConta()>0 && this.getStatusConta()==false){
+            JOptionPane.showMessageDialog(null, "Impossível encerrar a conta, o Saldo precisa ser Zero\n"+
                     "Seu saldo atual é R$ "+ this.getSaldoConta());
         }
         else{
-            this.statusConta=false;
+            this.setStatusConta(true);
             JOptionPane.showMessageDialog(null, "Conta encerrada com Sucesso");
         }
+    }
+    
+    public void depositar(){
+      
+       
+        if(this.getStatusConta()==true){
+            float valorDeposito=Float.parseFloat(JOptionPane.showInputDialog(null,"Digite o Valor a ser depositado: "));
+            this.setSaldoConta(this.getSaldoConta()+valorDeposito);
+            JOptionPane.showMessageDialog(null, "Valor R$ "+valorDeposito+ " depositado com Sucesso!\n"+"Seu saldo atual é R$ "+
+                        this.getSaldoConta());                
+        }
+         
+       else{
+        JOptionPane.showMessageDialog(null, "Não é possível depositar, conta fechada");
+    }
     }
     
     public void sacar(){
         float valorSaque=Float.parseFloat(JOptionPane.showInputDialog(null,"Qual valor você quer sacar?"));
            if(this.getSaldoConta()>=valorSaque ){
-               this.setSaldoConta(saldoConta-valorSaque);
+               this.setSaldoConta(this.getSaldoConta()-valorSaque);
                 JOptionPane.showMessageDialog(null, "Valor R$ "+valorSaque+ " sacado com Sucesso!\n"+"Seu saldo atual é R$ "+
                         this.getSaldoConta());
             }
@@ -106,41 +119,32 @@ public class ContaBanco {
             }
            }
     
-    public void depositar(){
-      
-       
-        if(this.statusConta==true){
-            float valorDeposito=Float.parseFloat(JOptionPane.showInputDialog(null,"Digite o Valor a ser depositado: "));
-            this.setSaldoConta(saldoConta+valorDeposito);
-            JOptionPane.showMessageDialog(null, "Valor R$ "+valorDeposito+ " depositado com Sucesso!\n"+"Seu saldo atual é R$ "+
-                        this.getSaldoConta());                
-        }
-         
-       else{
-        JOptionPane.showMessageDialog(null, "Não é possível depositar, Sua conta foi ecnerrada");
-    }
-    }
+    
     
     public void pagarMensalidade(){
         String pagarMensalidade=JOptionPane.showInputDialog(null, "Quer pagar sua mensalidade? [S]SIM [N]NAO");
-            if("s".equals(pagarMensalidade)||"S".equals(pagarMensalidade)){
-               if("Conta Corrente".equals(this.getTipoConta())){
-                    this.setSaldoConta(saldoConta-12);
-                    JOptionPane.showMessageDialog(null, "Você pagou sua mensalidade.\n"+
+            if(this.getStatusConta()==true){
+                if("s".equals(pagarMensalidade)||"S".equals(pagarMensalidade)){
+                    if("Conta Corrente".equals(this.getTipoConta())){
+                        this.setSaldoConta(this.getSaldoConta()-12);
+                        JOptionPane.showMessageDialog(null, "Você pagou sua mensalidade.\n"+
                         "Foi descontado R$ 12,00 do seu saldo\n"+
                         "Seu saldo atual é de R$ "+this.getSaldoConta());
-                }else{
-                   this.setSaldoConta(saldoConta-6);
-                    JOptionPane.showMessageDialog(null, "Você pagou sua mensalidade.\n"+
+                    }
+                    else{
+                        this.setSaldoConta(this.getSaldoConta()-6);
+                        JOptionPane.showMessageDialog(null, "Você pagou sua mensalidade.\n"+
                         "Foi descontado R$ 6,00 do seu saldo\n"+
                         "Seu saldo atual é de R$ "+this.getSaldoConta());
-               }
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Você Não pagou sua mensalidade.");
+                }
             }
-            else{
-                 JOptionPane.showMessageDialog(null, "Você Não pagou sua mensalidade.");
-                        
-                
-            }
+           else{
+               JOptionPane.showMessageDialog(null, "Não Permitido. Conta Encerrada");
+           }
     }
     
     public void extratoConta(){
