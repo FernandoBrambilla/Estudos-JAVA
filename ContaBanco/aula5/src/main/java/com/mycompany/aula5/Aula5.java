@@ -19,11 +19,9 @@ public class Aula5 {
         conta1.abrirConta();
         conta1.depositar();
         conta1.sacar();
-        conta1.encerrarConta();
-        
-        
         conta1.pagarMensalidade();
         conta1.extratoConta();
+        conta1.encerrarConta();
         
         
         ContaBanco conta2=new ContaBanco("4534-2", "Conta Poupança", "Gislaine Lourenço Bambilla", 0, false);
